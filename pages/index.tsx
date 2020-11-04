@@ -34,6 +34,7 @@ export default function Home() {
           <Link href="/x">
             <a className={styles.card}>
               <h3>Modules</h3>
+              <br/>
               <p>Find awesome modules on Nest</p>
             </a>
           </Link>
@@ -41,17 +42,20 @@ export default function Home() {
           <Link href="/user">
             <a className={styles.card}>
               <h3>Profile</h3>
+              <br/>
               <p>View your user profile</p>
             </a>
           </Link>
 
           <a href="https://nextjs.org/" className={styles.card}>
             <h3>Next.js</h3>
+            <br/>
             <p>The React Framework</p>
           </a>
 
           <a href="https://github.com/maximousblk/next-nest-test" className={styles.card}>
             <h3>Source code</h3>
+            <br/>
             <p>Source code on GitHub.</p>
           </a>
         </div>
