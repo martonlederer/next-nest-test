@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../styles/Home.module.css';
+import styles from '../styles/Home.module.sass';
 import { useSession } from 'next-auth/client';
 
 export default function User() {

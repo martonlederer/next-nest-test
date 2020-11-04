@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import styles from '../../styles/module.module.css';
+import styles from '../../styles/mod.module.sass';
 import { Remarkable } from 'remarkable';
-const HeaderIdsPlugin = require('remarkable-header-ids');
 
+const HeaderIdsPlugin = require('remarkable-header-ids');
 const md = new Remarkable({
   html: true,
   typographer: true,

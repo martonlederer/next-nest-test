@@ -1,0 +1,74 @@
+.card 
+  $card-border-radius: 10px
+  position: relative
+  margin: 1rem
+  flex-basis: 45%
+  padding: 1.5rem
+  text-align: left
+  color: inherit
+  text-decoration: none
+  background-color: #fff
+  border-radius: 10px
+  transition: all .3s
+
+  &::before, &::after 
+    content: ''
+    position: absolute
+    top: -1.5px
+    left: -1px
+    right: -1.5px
+    bottom: -1px
+    border-radius: $card-border-radius + 1px
+    z-index: -1
+    background: #eaeaea
+    transition: all .15s ease
+
+  &::after 
+    opacity: 0
+    background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+
+  &:hover,
+  &:focus,
+  &:active 
+    color: rgb(34, 193, 195)
+
+    &::after
+      opacity: 1
+
+  h3 
+    margin: 0 0 1rem 0
+    font-size: 1.5rem
+
+  p 
+    margin: 0
+    font-size: 1.25rem
+    line-height: 1.5
+
+  h3, p
+    position: relative
+    display: inline-block
+    transition: all .15s ease
+
+    &::after
+      content: ''
+      position: absolute
+      bottom: 0
+      height: 2px
+      left: 0
+      right: 0
+      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+      opacity: 0
+
+    &:hover
+      text-decoration: none
+
+      &::after
+        text-decoration: none
+        opacity: 1
+
+  &:hover
+    h3, p
+      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+      background-clip: text
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent

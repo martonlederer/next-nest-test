@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../../styles/x.module.css';
+import styles from '../../styles/x.module.sass';
 
 export default function list({ modules, count }) {
   return (

@@ -42,3 +42,31 @@ pre
   padding: 0.75rem
   font-size: 1.1rem
   font-family: 'JetBrains Mono', Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
+
+.section
+  padding: 2.3em 20vw
+
+  h1
+    font-size: 2.62em
+    margin:
+      top: 0
+      bottom: .5em
+
+  p
+    font-size: 1.25em
+    line-height: 1.65em
+    text-align: justify
+
+    a
+      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+      background-clip: text
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent
+      font-weight: 500
+      transition: all .3s
+
+      &:hover
+        opcaity: .75
+
+  @media screen and (max-width: 720px)
+    padding: 0 8.5vw
