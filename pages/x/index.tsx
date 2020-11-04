@@ -2,10 +2,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/x.module.sass';
 import cardStyles from '../../styles/cards.module.sass';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-export default function list({ modules, count }) {
+export default function list() {
+  const [modules, setModules] = useState([]);
+  const [count, setCount] = useState(0);
+
+  let loading = false;
+
   useEffect(() => {
+    loadModules(20);
+    axios.get('/api/modules/all').then(({ data }) => setCount(data.total))
     window.addEventListener('scroll', handleScroll, true);
   
     return function cleanup () {
@@ -13,8 +21,23 @@ export default function list({ modules, count }) {
     }
   })
 
-  function handleScroll () {
-    
+  function handleScroll () {    
+    if(window.scrollY + window.innerHeight > document.body.clientHeight - 400) {
+      loadModules(modules.length + 40);
+    }
+  }
+
+  // TODO: in api v2 change the limit to the additional number of packages to load
+  function loadModules (limit: number) {
+    if(!loading && modules.length < limit) {
+      loading = true;
+      axios
+        .get(`https://x.nest.land/api/packages/${limit}`)
+        .then(({ data }) => {
+          setModules(data);
+          setTimeout(() => loading = false, 700); // wait a bit so everything renders / appears
+        });
+    }
   }
 
   return (
@@ -71,6 +94,6 @@ export default function list({ modules, count }) {
 }
 
 export async function getStaticProps({ params }) {
-  const modules = await fetch(`https://x.nest.land/api/packages`).then((res) => res.json());
+  const modules = await fetch(`https://x.nest.land/api/packages/20`).then((res) => res.json());
   return { props: { modules, count: modules.length }, revalidate: 20 };
 }
