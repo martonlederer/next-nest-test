@@ -21,7 +21,8 @@ export default function list() {
     }
   })
 
-  function handleScroll () {    
+  function handleScroll () {
+    if(count === 0 || count <= modules.length) return;
     if(window.scrollY + window.innerHeight > document.body.clientHeight - 400) {
       loadModules(modules.length + 40);
     }
