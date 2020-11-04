@@ -1,8 +1,22 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/x.module.sass';
+import cardStyles from '../../styles/cards.module.sass';
+import { useEffect } from 'react';
 
 export default function list({ modules, count }) {
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, true);
+  
+    return function cleanup () {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  })
+
+  function handleScroll () {
+    
+  }
+
   return (
     <div className="container">
       <Head>
@@ -29,10 +43,12 @@ export default function list({ modules, count }) {
 
         <div className={styles.grid}>
           {modules.map((module, i) => (
-            <Link href={`x/${module.name}`}>
-              <a className={styles.card} key={i}>
+            <Link href={`x/${module.name}`} key={i}>
+              <a className={cardStyles.card + " " + styles.card}>
                 <h3>{module.name}</h3>
+                <br/>
                 <p>{module.description}</p>
+                <br/>
                 <sub>by @{module.owner}</sub>
               </a>
             </Link>

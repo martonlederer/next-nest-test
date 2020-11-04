@@ -39,24 +39,26 @@ export default function Home() {
             </a>
           </Link>
 
-          <Link href="/user">
+          <Link href="/std">
             <a className={cardStyles.card}>
-              <h3>Profile</h3>
+              <h3>Std</h3>
               <br/>
-              <p>View your user profile</p>
+              <p>Deno STD on nest</p>
             </a>
           </Link>
 
-          <a href="https://nextjs.org/" className={cardStyles.card}>
-            <h3>Next.js</h3>
-            <br/>
-            <p>The React Framework</p>
-          </a>
+          <Link href="/tokens">
+            <a className={cardStyles.card}>
+              <h3>Tokens</h3>
+              <br/>
+              <p>Get paid for your modules</p>
+            </a>
+          </Link>
 
-          <a href="https://github.com/maximousblk/next-nest-test" className={cardStyles.card}>
-            <h3>Source code</h3>
+          <a href="https://docs.nest.land" className={cardStyles.card}>
+            <h3>Docs</h3>
             <br/>
-            <p>Source code on GitHub.</p>
+            <p>Nest.land documentation</p>
           </a>
         </div>
 

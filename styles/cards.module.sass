@@ -46,7 +46,10 @@
     font-size: 1.25rem
     line-height: 1.5
 
-  h3, p
+  sub 
+    font-size: .82em
+
+  h3, p, sub
     position: relative
     display: inline-block
     transition: all .15s ease
@@ -68,6 +71,10 @@
         text-decoration: none
         opacity: 1
 
+  sub::after
+    height: 1.5px
+    bottom: -3px
+
   &:hover
-    h3, p
+    h3, p, sub
       +variables.gradientText
