@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/client';
 export default function User() {
   const [session, loading] = useSession();
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>User - Nest</title>
         <meta name="description" content="User Profile" />
@@ -21,31 +21,31 @@ export default function User() {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          {loading && <p>loading...</p>}
+      <main>
+        <div className="landing">
+          {loading && <h1 className="title">loading...</h1>}
           {!loading && !session && (
-            <p>
+            <h1 className="title">
               Please{' '}
               <Link href="/api/auth/signin">
                 <a>Sign in</a>
               </Link>
-            </p>
+            </h1>
           )}
           {!loading && session && (
-            <p>
+            <h1 className="title">
               Signed in as{' '}
               <Link href="/api/auth/signout">
                 <a>{session.user.name}</a>
               </Link>
+            </h1>
+          )}
+          {!loading && session && (
+            <p className={styles.description}>
+              User email: <code className={styles.code}>{session.user.email}</code>
             </p>
           )}
-        </h1>
-        {!loading && session && (
-          <p className={styles.description}>
-            User email: <code className={styles.code}>{session.user.email}</code>
-          </p>
-        )}
+        </div>
 
         <div className={styles.grid}>
           <Link href="/api/auth/signin">
@@ -74,13 +74,13 @@ export default function User() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
         </a>
       </footer>
     </div>

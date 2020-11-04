@@ -11,7 +11,7 @@ const md = new Remarkable({
 export default function Module({ module, readme }) {
   if (!module.not_found) {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <Head>
           <title>{module.name}</title>
           <meta name="description" content={module.description} />
@@ -26,13 +26,11 @@ export default function Module({ module, readme }) {
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
-        <main className={styles.main}>
-          <h1 className={styles.title}>
-            <p>
-              x/<a href={`https://nest.land/package/${module.name}`}>{module.name}</a>
-            </p>
-          </h1>
-          <p className={styles.description}>{module.description}</p>
+        <main>
+          <div className="landing">
+            <h1 className="title">x/<a href={`https://nest.land/package/${module.name}`}>{module.name}</a></h1>
+            <p className="description">{module.description}</p>
+          </div>
           <div className={styles.grid}>
             <div className={styles.card}>
               <div dangerouslySetInnerHTML={{ __html: md.render(readme) }}></div>
@@ -40,30 +38,30 @@ export default function Module({ module, readme }) {
           </div>
         </main>
 
-        <footer className={styles.footer}>
+        <footer>
           <a href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app" target="_blank" rel="noopener noreferrer">
-            Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+            Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
           </a>
         </footer>
       </div>
     );
   } else {
     return (
-      <div className={styles.container}>
+      <div className="container">
         <Head>
           <title>Not Found</title>
         </Head>
 
-        <main className={styles.main}>
-          <h1 className={styles.title}>
-            <p>Module Not Found</p>
-          </h1>
-          <p className={styles.description}>The Module you're looking for doesn't exist.</p>
+        <main>
+          <div className="landing">
+            <h1 className="title">Module Not Found</h1>
+            <p className="description">The Module you're looking for doesn't exist.</p>
+          </div>          
         </main>
 
-        <footer className={styles.footer}>
+        <footer>
           <a href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app" target="_blank" rel="noopener noreferrer">
-            Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+            Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
           </a>
         </footer>
       </div>

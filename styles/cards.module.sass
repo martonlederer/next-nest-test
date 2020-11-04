@@ -1,3 +1,5 @@
+@use '_variables.sass' as variables
+  
 .card 
   $card-border-radius: 10px
   position: relative
@@ -20,17 +22,17 @@
     bottom: -1px
     border-radius: $card-border-radius + 1px
     z-index: -1
-    background: #eaeaea
+    background: variables.$light-border
     transition: all .15s ease
 
   &::after 
     opacity: 0
-    background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+    background: linear-gradient(to left, variables.$yellow-theme 0%, variables.$green-theme 100%)
 
   &:hover,
   &:focus,
   &:active 
-    color: rgb(34, 193, 195)
+    color: variables.$green-theme
 
     &::after
       opacity: 1
@@ -56,7 +58,7 @@
       height: 2px
       left: 0
       right: 0
-      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
+      background: linear-gradient(to left, variables.$yellow-theme 0%, variables.$green-theme 100%)
       opacity: 0
 
     &:hover
@@ -68,7 +70,4 @@
 
   &:hover
     h3, p
-      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
-      background-clip: text
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
+      +variables.gradientText

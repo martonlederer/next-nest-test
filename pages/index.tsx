@@ -5,7 +5,7 @@ import cardStyles from '../styles/cards.module.sass';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>Nest</title>
         <meta name="description" content="Immutable Module registry for Deno" />
@@ -20,14 +20,15 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <span>Nest</span>
-        </h1>
-
-        <p className={styles.description}>
-          An <em>immutable</em> module registry for Deno, on the blockweave
-        </p>
+      <main>
+        <div className="landing">
+          <h1 className="title">
+            Welcome to <span>Nest</span>
+          </h1>
+          <p className="description">
+            An <em>immutable</em> module registry for Deno, on the blockweave
+          </p>
+        </div>
 
         <div className={styles.grid}>
           <Link href="/x">
@@ -67,9 +68,9 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
         </a>
       </footer>
     </div>

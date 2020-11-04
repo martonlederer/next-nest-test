@@ -4,7 +4,7 @@ import styles from '../../styles/x.module.sass';
 
 export default function list({ modules, count }) {
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>Modules - Nest</title>
         <meta property="og:title" content="Modules - Nest" />
@@ -19,14 +19,13 @@ export default function list({ modules, count }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <p>Modules</p>
-        </h1>
-
-        <p className={styles.description}>
-          Currently listing <code className={styles.code}>{count}</code> modules
-        </p>
+      <main>
+        <div className="landing">
+          <h1 className="title">Modules</h1>
+          <p className="description">
+            Currently listing <code>{count}</code> modules
+          </p>
+        </div>
 
         <div className={styles.grid}>
           {modules.map((module, i) => (
@@ -42,13 +41,13 @@ export default function list({ modules, count }) {
         <p>You've reached the nether region!</p>
       </main>
 
-      <footer className={styles.footer}>
+      <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
         </a>
       </footer>
     </div>

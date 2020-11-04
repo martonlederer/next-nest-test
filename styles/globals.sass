@@ -1,24 +1,24 @@
-$font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
-  
+@use '_variables.sass' as variables
+
 html,
 body
   padding: 0
   margin: 0
-  font-family: $font
+  font-family: variables.$font
 
 *
   box-sizing: border-box
 
 ::selection
   color: #fff
-  background: rgb(34, 193, 195)
+  background: variables.$green-theme
 
 ::-moz-selection
   color: #fff
-  background: rgb(34, 193, 195)
+  background: variables.$green-theme
 
 button, input, textarea, select
-  font-family: $font
+  font-family: variables.$font
 
 a
   color: inherit
@@ -58,15 +58,70 @@ pre
     text-align: justify
 
     a
-      background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%)
-      background-clip: text
-      -webkit-background-clip: text
-      -webkit-text-fill-color: transparent
+      +variables.gradientText
       font-weight: 500
       transition: all .3s
 
       &:hover
         opcaity: .75
 
-  @media screen and (max-width: 720px)
+  @media screen and (max-width: variables.$mobile-width)
     padding: 0 8.5vw
+
+.container 
+  min-height: 100vh
+  padding: 0 0.5rem
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+  main 
+    padding: 5rem 0
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .landing
+      .title, .description 
+        text-align: center
+
+      .title 
+        margin: 0
+        line-height: 1.15
+        font-size: 4rem
+        padding: 1em 0
+        color: #000
+
+        span
+          +variables.gradientText
+
+      .description 
+        line-height: 1.5
+        font-size: 1.5rem
+
+        code
+          background: #fafafa
+          border-radius: 5px
+          padding: 0.75rem
+          font-size: 1.1rem
+          font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace
+
+footer 
+  width: 100%
+  height: 100px
+  border-top: 1px solid variables.$light-border
+  display: flex
+  justify-content: center
+  align-items: center
+
+  img.vercel-logo
+    margin-left: 0.5rem
+    height: 1em
+
+  a 
+    display: flex
+    justify-content: center
+    align-items: center
