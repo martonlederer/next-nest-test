@@ -22,12 +22,12 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>
           <p>
-            Welcome to <a href="https://nest.land/">Nest</a>
+            Nest.land
           </p>
         </h1>
 
         <p className={styles.description}>
-          The <em>immutable</em> module registry for Deno
+          An <em>immutable</em> module registry for Deno, on the blockweave
         </p>
 
         <div className={styles.grid}>
