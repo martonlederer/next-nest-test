@@ -40,6 +40,7 @@
   line-height: 1.15;
   font-size: 4rem;
   text-transform: uppercase;
+  padding: 1em 0;
   background: linear-gradient(to left, rgb(253, 187, 45) 0%, rgb(34, 193, 195) 100%);
   background-clip: text;
   -webkit-background-clip: text;

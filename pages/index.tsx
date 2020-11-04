@@ -21,9 +21,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <p>
-            Nest.land
-          </p>
+          Nest.land
         </h1>
 
         <p className={styles.description}>
