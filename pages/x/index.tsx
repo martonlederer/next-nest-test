@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/x.module.sass';
-import cardStyles from '../../styles/cards.module.sass';
+import cardStyles from '../../styles/components/cards.module.sass';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Nav from '../../components/Nav';
 
 export default function list() {
   const [modules, setModules] = useState([]);
@@ -58,6 +59,7 @@ export default function list() {
       </Head>
 
       <main>
+        <Nav />
         <div className="landing">
           <h1 className="title">Modules</h1>
           <p className="description">

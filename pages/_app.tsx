@@ -1,4 +1,5 @@
 import '../styles/globals.sass';
+import 'jetbrains-mono';
 import { Provider } from 'next-auth/client';
 
 export default function App({ Component, pageProps }) {

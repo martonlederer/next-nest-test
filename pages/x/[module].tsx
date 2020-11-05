@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../../styles/mod.module.sass';
 import { Remarkable } from 'remarkable';
+import Nav from '../../components/Nav';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 const md = new Remarkable({
@@ -27,6 +28,7 @@ export default function Module({ module, readme }) {
         </Head>
 
         <main>
+          <Nav />
           <div className="landing">
             <h1 className="title">x/<a href={`https://nest.land/package/${module.name}`}>{module.name}</a></h1>
             <p className="description">{module.description}</p>

@@ -44,8 +44,17 @@ pre
   font-family: variables.$code-font
 
 .section
-  padding: 2.3em 17.5vw
+  padding:
+    top: 2.3em
+    bottom: 2.3em
+  max-width: 1024px
 
+  @media screen and (max-width: variables.$smaller-screens)
+    max-width: unset
+    padding: 
+      left: 17.5vw
+      right: 17.5vw
+    
   &:last-child
     padding-bottom: 0
 
@@ -132,3 +141,21 @@ footer
     display: flex
     justify-content: center
     align-items: center
+
+.fade-transition-enter
+  display: block
+  opacity: 0
+
+.fade-transition-enter-active
+  opacity: 1
+  transition: opacity .3s
+
+.fade-transition-exit
+  opacity: 1
+
+.fade-transition-exit-active
+  opacity: 0
+  transition: opacity .3s
+
+.fade-transition-exit-done
+  display: none !important

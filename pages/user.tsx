@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.sass';
 import { useSession } from 'next-auth/client';
+import Nav from '../components/Nav';
 
 export default function User() {
   const [session, loading] = useSession();
@@ -22,6 +23,7 @@ export default function User() {
       </Head>
 
       <main>
+        <Nav />
         <div className="landing">
           {loading && <h1 className="title">loading...</h1>}
           {!loading && !session && (

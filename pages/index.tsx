@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/home.module.sass';
-import cardStyles from '../styles/cards.module.sass';
+import cardStyles from '../styles/components/cards.module.sass';
 import Nav from '../components/Nav';
 
 export default function Home() {

@@ -1,0 +1,43 @@
+@use '../_variables' as variables
+
+.button
+  position: relative
+  color: #fff !important
+  background: variables.$green-theme
+  background: linear-gradient(to left, variables.$yellow-theme 0%, variables.$green-theme 100%)
+  border-radius: 4.5px
+  font-weight: 500
+  font-size: 1.27em
+  text-decoration: none
+  cursor: pointer
+  text-align: center
+  padding: .17em .92em .2em
+  transition: all .3s
+
+  &:hover
+    background: #fff
+    color: #000 !important
+  
+  &::after
+    content: ''
+    position: absolute
+    top: -3px
+    left: -3.5px
+    right: -3px
+    bottom: -3px
+    z-index: -1
+    border-radius: 7px
+    background: variables.$green-theme
+    background: linear-gradient(to left, variables.$yellow-theme 0%, variables.$green-theme 100%)
+
+.buttonGreen
+  background: variables.$green-theme
+
+  &::after
+    background: variables.$green-theme
+
+.buttonYellow
+  background: variables.$yellow-theme
+
+  &::after
+    background: variables.$yellow-theme
