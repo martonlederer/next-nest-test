@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from '../styles/home.module.sass';
 import cardStyles from '../styles/components/cards.module.sass';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -96,11 +97,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>
-        <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

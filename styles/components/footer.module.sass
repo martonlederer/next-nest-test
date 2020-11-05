@@ -1,0 +1,91 @@
+@use '../_variables.sass' as variables
+  
+.footer
+  border-top: 1px solid variables.$light-border
+  background-color: variables.$darker-white-bg
+  padding:
+    top: 2.17em
+    bottom: 3.8em
+  width: 100%
+
+  @media screen and (max-width: variables.$smaller-screens)
+    padding: 
+      left: 17.5vw
+      right: 17.5vw
+
+  @media screen and (max-width: variables.$mobile-width)
+    padding: 
+      left: 8.5vw
+      right: 8.5vw
+
+.menus
+  display: flex
+  align-items: flex-start
+  margin-bottom: 2.4em
+  width: 100%
+
+  div
+    width: 25%
+
+    h4
+      font-size: 1.15em
+      margin: 0
+        bottom: 1.2em
+      font-weight: 500
+
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
+      
+      li
+        margin: .3em 0
+
+        a
+          text-decoration: none
+          font-size: .93em
+          color: variables.$lighter-text
+          transition: all .3s
+
+          &:hover
+            color: #000
+
+.branding
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-bottom: .7em
+
+  div, a
+    display: flex
+    align-items: center
+
+  div
+    font-size: 2.2em
+    font-weight: 600
+    +variables.gradientText
+
+    img
+      height: 1.1em
+      margin-right: .35em
+
+  a
+    text-decoration: none
+    color: variables.$darker-text
+    cursor: pointer
+    transition: all .3s
+
+    img
+      height: 1.4em
+      margin-left: .45em
+
+    &:hover
+      opacity: .7
+
+.copyright
+  font-size: .83em
+  color: variables.$lighter-text
+  margin: 0
+
+  a
+    text-decoration: none
