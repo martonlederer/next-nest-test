@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/home.module.sass';
 import cardStyles from '../styles/cards.module.sass';
+import Nav from '../components/Nav';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <Nav />
         <div className="landing">
           <h1 className="title">
             Welcome to <span>Nest</span>
