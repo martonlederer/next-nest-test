@@ -14,7 +14,7 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
-  function handleScroll() {    
+  function handleScroll() {
     if(window.scrollY > 65) {
       setShown(true);
     }else {
@@ -40,7 +40,7 @@ export default function Nav() {
           <Link href="/tokens">Tokens</Link>
           <a href="https://docs.nest.land" target="_blank" rel="noopener noreferer">Documentation</a>
           <Link href="/register">
-            <a className={buttonStyles.button + ' ' + buttonStyles.buttonGreen}>
+            <a className={buttonStyles.button}>
               Get started
             </a>
           </Link>

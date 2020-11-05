@@ -144,18 +144,21 @@ footer
 
 .fade-transition-enter
   display: block
-  opacity: 0
+  opacity: 0 !important
 
 .fade-transition-enter-active
-  opacity: 1
+  opacity: 1 !important
   transition: opacity .3s
 
 .fade-transition-exit
-  opacity: 1
+  opacity: 1 !important
 
 .fade-transition-exit-active
-  opacity: 0
+  opacity: 0 !important
   transition: opacity .3s
 
 .fade-transition-exit-done
   display: none !important
+
+.fade-transition-enter-done
+  opacity: 1 !important
