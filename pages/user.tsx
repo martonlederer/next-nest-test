@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from '../styles/Home.module.sass';
+import styles from '../styles/home.module.sass';
 import { useSession } from 'next-auth/client';
 import Nav from '../components/Nav';
 
