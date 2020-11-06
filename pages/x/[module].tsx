@@ -1,14 +1,24 @@
 import Head from 'next/head';
 import styles from '../../styles/mod.module.sass';
+import 'highlight.js/styles/github.css';
 import { Remarkable } from 'remarkable';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
+import hljs from 'highlight.js';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
+// setup markdown rendering
 const md = new Remarkable({
   html: true,
   typographer: true,
+  highlight: function (str: string, lang: string) {
+    if (lang && hljs.getLanguage(lang))
+      try { return hljs.highlight(lang, str).value } catch (err) {}
+    try { return hljs.highlightAuto(str).value } catch (err) {}
+
+    return '';
+  }
 }).use(HeaderIdsPlugin({ anchorText: '<span class="head_anchor">#</span>' }));
 
 export default function Module({ module, readme }) {
