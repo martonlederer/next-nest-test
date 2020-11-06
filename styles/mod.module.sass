@@ -1,35 +1,26 @@
 @use '_variables.sass' as variables
 
-.title
-  margin: 0
-  line-height: 1.15
-  font-size: 4rem
-  
-  a 
-    color: #0070f3
-    text-decoration: none
+.description
+  max-width: 70vw
 
-    &:hover,
-    &:focus,
-    &:active 
-      text-decoration: underline
+.landingLink
+  text-decoration: none
+  transition: all .3s
 
-.title,
-.description 
-  text-align: center
+  &:hover
+    position: relative
+    +variables.gradientText
 
-.description 
-  line-height: 1.5
-  font-size: 1.5rem
+    &::after
+      content: ''
+      position: absolute
+      bottom: 0
+      left: 0
+      right: 0
+      height: .11em
+      background: linear-gradient(to left, variables.$yellow-theme 0%, variables.$green-theme 100%)
 
-.code 
-  background: variables.$darker-white-bg
-  border-radius: 5px
-  padding: 0.75rem
-  font-size: 1.1rem
-  font-family: variables.$code-font
-
-.grid 
+.grid
   display: flex
   align-items: center
   justify-content: center
@@ -45,22 +36,10 @@
   min-width: 100%
   margin: 1rem
   flex-basis: 45%
-  padding: 1.5rem
+  padding: 1.25em 2.2em
   text-align: left
   color: inherit
   text-decoration: none
   border: 1px solid #eaeaea
   border-radius: 10px
   transition: color 0.15s ease, border-color 0.15s ease
-
-  h3 
-    margin: 0 0 1rem 0
-    font-size: 1.5rem
-
-  p 
-    margin: 0
-    font-size: 1.25rem
-    line-height: 1.5
-
-  img 
-    max-width: 100%

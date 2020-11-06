@@ -3,6 +3,7 @@ import styles from '../../styles/mod.module.sass';
 import { Remarkable } from 'remarkable';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
+import Link from 'next/link';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 const md = new Remarkable({
@@ -32,12 +33,19 @@ export default function Module({ module, readme }) {
         <main>
           <Nav />
           <div className="landing">
-            <h1 className="title">x/<a href={`https://nest.land/package/${module.name}`}>{module.name}</a></h1>
-            <p className="description">{module.description}</p>
+            <h1 className="title">
+              <Link href="/x">
+                <a className={styles.landingLink}>
+                  x
+                </a>
+              </Link>
+              /{module.name}
+            </h1>
+            <p className={'description ' + styles.description}>{module.description}</p>
           </div>
           <div className={styles.grid}>
             <div className={styles.card}>
-              <div dangerouslySetInnerHTML={{ __html: md.render(readme) }}></div>
+              <div className="markdown" dangerouslySetInnerHTML={{ __html: md.render(readme) }}></div>
             </div>
           </div>
         </main>

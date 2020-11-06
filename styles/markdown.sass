@@ -1,89 +1,141 @@
 @use '_variables.sass' as variables
-  
-pre
-  position: relative
 
-  code
-    &.language-shell, &.language-bash, &.language-sh, &.language-fish
-      margin-left: 1em
+.markdown
+  a 
+    color: #0070f3
+    text-decoration: none
 
-      &::before
-        content: '$' // TODO in server side api: remove if there's alread a "$"
-        position: absolute
-        top: 50%
-        left: 0
-        transform: translateY(-50%)
-        +variables.gradientText
+    &:hover,
+    &:focus,
+    &:active 
+      text-decoration: underline
 
-    &::after
+  h1
+    font-size: 2.2em
+
+  h2
+    font-size: 1.8em
+
+  h3
+    font-size: 1.4em
+
+  h4
+    font-size: 1em
+
+  h5
+    font-size: .85em
+
+  h1, h2, h3, h4, h5
+    position: relative
+    margin:
+      top: .5em
+      bottom: .3em
+
+    a.header-anchor
       position: absolute
-      top: .4em
-      right: .75em
-      color: variables.$darker-text
-      font-size: .6em
-      font-weight: 500
-      text-transform: uppercase
-      font-family: variables.$font
+      opacity: 0
+      top: 50%
+      left: -.85em
+      transform: translateY(-50%)
+      transition: all .3s
 
-    &.language-ts::after, &.language-tsx::after
-      content: 'ts'
+    &:hover a.header-anchor
+      opacity: 1
 
-    &.language-js::after, &.language-jsx::after
-      content: 'js'
+  p
+    margin: 1em 0
+    font-size: 1.12em
+    line-height: 1.5
 
-    &.language-rs::after, &.language-rust::after
-      content: 'rs'
+  img 
+    max-width: 100%
 
-    &.language-go::after
-      content: 'go'
+  pre
+    position: relative
 
-    &.language-html::after
-      content: 'html'
+    code
+      &.language-shell, &.language-bash, &.language-sh, &.language-fish
+        padding-left: 2em
+        display: flex
 
-    &.language-css::after
-      content: 'css'
+        &::before
+          content: '$' // TODO in server side api: remove if there's alread a "$"
+          position: absolute
+          top: 50%
+          left: 1.2em
+          font-weight: bold
+          transform: translateY(-50%)
+          +variables.gradientText
 
-    &.language-scss::after
-      content: 'scss'
+      &::after
+        position: absolute
+        top: .4em
+        right: .75em
+        color: variables.$darker-text
+        font-size: .6em
+        font-weight: 500
+        text-transform: uppercase
+        font-family: variables.$font
 
-    &.language-sass::after
-      content: 'sass'
+      &.language-ts::after, &.language-tsx::after
+        content: 'ts'
 
-    &.language-less::after
-      content: 'less'
+      &.language-js::after, &.language-jsx::after
+        content: 'js'
 
-    &.language-stylus::after
-      content: 'stylus'
+      &.language-rs::after, &.language-rust::after
+        content: 'rs'
 
-    &.language-coffee::after
-      content: 'coffee'
+      &.language-go::after
+        content: 'go'
 
-    &.language-shell::after
-      content: 'shell'
+      &.language-html::after
+        content: 'html'
 
-    &.language-bash::after
-      content: 'bash'
+      &.language-css::after
+        content: 'css'
 
-    &.language-sh::after
-      content: 'sh'
+      &.language-scss::after
+        content: 'scss'
 
-    &.language-json::after
-      content: 'json'
+      &.language-sass::after
+        content: 'sass'
 
-    &.language-yaml::after, &.language-yml::after
-      content: 'YAML'
+      &.language-less::after
+        content: 'less'
 
-    &.language-fish::after
-      content: 'fish'
+      &.language-stylus::after
+        content: 'stylus'
 
-    &.language-graphql::after, &.language-gql::after
-      content: 'graphql'
+      &.language-coffee::after
+        content: 'coffee'
 
-    &.language-markdown::after, &.language-md::after
-      content: 'markdown'
+      &.language-shell::after
+        content: 'shell'
 
-    &.language-rest::after
-      content: 'rest'
+      &.language-bash::after
+        content: 'bash'
 
-    &.language-svg::after
-      content: 'svg'
+      &.language-sh::after
+        content: 'sh'
+
+      &.language-json::after
+        content: 'json'
+
+      &.language-yaml::after, &.language-yml::after
+        content: 'YAML'
+
+      &.language-fish::after
+        content: 'fish'
+
+      &.language-graphql::after, &.language-gql::after
+        content: 'graphql'
+
+      &.language-markdown::after, &.language-md::after
+        content: 'markdown'
+
+      &.language-rest::after
+        content: 'rest'
+
+      &.language-svg::after
+        content: 'svg'
