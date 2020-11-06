@@ -13,6 +13,7 @@
     "pre-commit": "prettier --write . && git add -A"
   },
   "dependencies": {
+    "@types/semver": "^7.3.4",
     "axios": "^0.21.0",
     "highlight.js": "^10.3.2",
     "jetbrains-mono": "^1.0.1",
@@ -24,7 +25,8 @@
     "react-transition-group": "^4.4.1",
     "remarkable": "^2.0.1",
     "remarkable-header-ids": "^0.2.0",
-    "sass": "^1.28.0"
+    "sass": "^1.28.0",
+    "semver": "^7.3.2"
   },
   "devDependencies": {
     "@styled-jsx/plugin-sass": "^2.0.1",

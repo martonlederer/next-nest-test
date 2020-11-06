@@ -8,6 +8,10 @@ import Footer from '../../components/Footer';
 import Link from 'next/link';
 import hljs from 'highlight.js';
 import { bashFixer } from '../../utils/markdown';
+import semver from 'semver';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 // setup markdown rendering
@@ -31,22 +35,34 @@ const md = new Remarkable({
   .use(linkify)
   .use(bashFixer);
 
-export default function Module({ module, readme }) {
-  if (!module.not_found) {
+export default function Module({ module, readme, error }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (error && error.msg === 'Invalid versioning') router.push(`/x/${error.redirect}`);
+  });
+
+  if (!error) {
     return (
       <div className="container">
         <Head>
-          <title>{module.name}</title>
-          <meta name="description" content={module.description} />
+          <title>{module.package.name}</title>
+          <meta name="description" content={module.package.description} />
           <meta name="theme-color" content="#22c1c3" />
 
-          <meta property="og:title" content={module.name + ' - Nest'} />
-          <meta property="og:description" content={module.description} />
-          <meta property="og:image" content={`https://og.nest.land/${module.name}.png&fontSize=175px`} />
+          <meta property="og:title" content={module.package.name + ' - Nest'} />
+          <meta property="og:description" content={module.package.description} />
+          <meta
+            property="og:image"
+            content={`https://og.nest.land/${module.package.name}.png&fontSize=175px`}
+          />
 
-          <meta name="twitter:title" content={module.name + ' - Nest'} />
-          <meta name="twitter:description" content={module.description} />
-          <meta name="twitter:image" content={`https://og.nest.land/${module.name}.png&fontSize=175px`} />
+          <meta name="twitter:title" content={module.package.name + ' - Nest'} />
+          <meta name="twitter:description" content={module.package.description} />
+          <meta
+            name="twitter:image"
+            content={`https://og.nest.land/${module.package.name}.png&fontSize=175px`}
+          />
           <meta name="twitter:card" content="summary_large_image" />
         </Head>
 
@@ -57,9 +73,9 @@ export default function Module({ module, readme }) {
               <Link href="/x">
                 <a className={styles.landingLink}>x</a>
               </Link>
-              /{module.name}
+              /{module.package.name}
             </h1>
-            <p className={'description ' + styles.description}>{module.description}</p>
+            <p className={'description ' + styles.description}>{module.package.description}</p>
           </div>
           <div className={styles.grid}>
             <div className={styles.card}>
@@ -71,6 +87,8 @@ export default function Module({ module, readme }) {
         <Footer />
       </div>
     );
+  } else if (error.redirect) {
+    return <></>;
   } else {
     return (
       <div className="container">
@@ -80,8 +98,8 @@ export default function Module({ module, readme }) {
 
         <main>
           <div className="landing">
-            <h1 className="title">Module Not Found</h1>
-            <p className="description">The Module you're looking for doesn't exist.</p>
+            <h1 className="title">{error.msg}</h1>
+            <p className="description">{error.description}</p>
           </div>
         </main>
 
@@ -92,23 +110,57 @@ export default function Module({ module, readme }) {
 }
 
 export async function getStaticProps({ params }) {
-  const module = await fetch(`https://x.nest.land/api/package/${params.module}`)
-    .then((res) => res.json())
-    .catch((err) => {
-      return { latestVersion: '', not_found: true };
-    });
-  const latest_mod = await fetch(`https://x.nest.land/api/package/${module.latestVersion.replace('@', '/')}`)
-    .then((res) => res.json())
-    .catch((err) => '');
-  const readme = await fetch(`${latest_mod.prefix}/README.md`)
-    .then((res) => res.text())
-    .catch((err) => '');
+  // check if module includes version
+  if (!params.module.includes('@')) {
+    const latestVersion = await getLatestVersion(params.module);
+    if (typeof latestVersion !== 'string') return { props: { error: latestVersion } };
+    return { props: { error: { msg: 'Invalid versioning', redirect: `${params.module}@${latestVersion}` } } };
+  }
+
+  const [module, version] = params.module.split('@');
+
+  // check if version is valid semver
+  if (!semver.valid(version)) {
+    const latestVersion = await getLatestVersion(module);
+    if (typeof latestVersion !== 'string') return { props: { error: latestVersion } };
+    return { props: { error: { msg: 'Invalid versioning', redirect: `${module}@${latestVersion}` } } };
+  }
+
+  const latestModule = await axios
+    .get(`https://x.nest.land/api/package/${module}/${version}`)
+    .then(({ data }) => data)
+    .catch(() => null);
+  const moduleReadme = await axios
+    .get(`${latestModule.prefix}/README.md`)
+    .then(({ data }) => data)
+    .catch(() => null);
+
+  if (!latestModule) return { props: { msg: 'Could not load', description: 'Error loading module info.' } };
+
   return {
-    props: { module, readme, not_found: false },
+    props: { module: latestModule, readme: moduleReadme ?? '# Could not load README.md' },
     revalidate: 20
   };
 }
 
 export async function getStaticPaths() {
   return { paths: [], fallback: 'blocking' };
+}
+
+async function getLatestVersion(module: string): Promise<string | { msg: string; description: string }> {
+  return await axios
+    .get(`https://x.nest.land/api/package/${module}`)
+    .then(({ data }) => {
+      const stable = data.latestStableVersion,
+        latest = data.latestVersion;
+
+      if (stable) return stable.split('@')[stable.split('@').length - 1];
+      else if (latest) return latest.split('@')[latest.split('@').length - 1];
+      else return { msg: 'No version published', description: "There are't any versions published." };
+    })
+    .catch(({ response }) => {
+      if (response.status === 404)
+        return { msg: 'Module Not Found', description: "The Module you're looking for doesn't exist." };
+      else return { msg: 'Server error', description: 'There was an error with the server.' };
+    });
 }
