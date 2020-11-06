@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../../styles/mod.module.sass';
 import 'highlight.js/styles/github.css';
 import { Remarkable } from 'remarkable';
+import { linkify } from 'remarkable/linkify';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
@@ -13,13 +14,30 @@ const md = new Remarkable({
   html: true,
   typographer: true,
   highlight: function (str: string, lang: string) {
+    if (lang === 'sh' || lang === 'bash' || lang === 'shell') return ''; // highlighting breaks selecting terminal commands and comments display
     if (lang && hljs.getLanguage(lang))
       try { return hljs.highlight(lang, str).value } catch (err) {}
     try { return hljs.highlightAuto(str).value } catch (err) {}
 
     return '';
   }
-}).use(HeaderIdsPlugin({ anchorText: '<span class="head_anchor">#</span>' }));
+})
+  .use(HeaderIdsPlugin({ anchorText: '<span class="head_anchor">#</span>' }))
+  .use(linkify)
+  .use((md) => { 
+    // replace lines that start with "$" if the type of the parent element is a codeblock    
+    md.core.ruler.push('codeblocker', (state) => {
+      for(let i = 0; i < state.tokens.length; i++) {        
+        if(state.tokens[i].type !== 'fence') continue;
+        let lines = state.tokens[i].content.split('\n');
+        
+        for(let j = 0; j < lines.length; j++) {
+          lines[j] = lines[j].replace(/^\$( ?)/, '');
+        }
+        state.tokens[i].content = lines.join('\n');
+      }
+    });
+  });
 
 export default function Module({ module, readme }) {
   if (!module.not_found) {
