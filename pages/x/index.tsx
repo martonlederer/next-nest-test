@@ -5,6 +5,7 @@ import cardStyles from '../../styles/components/cards.module.sass';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Nav from '../../components/Nav';
+import Footer from '../../components/Footer';
 
 export default function list() {
   const [modules, setModules] = useState([]);
@@ -48,6 +49,7 @@ export default function list() {
         <title>Modules - Nest</title>
         <meta property="og:title" content="Modules - Nest" />
         <meta name="description" content="Find awesome Deno modules on Nest" />
+        <meta name="theme-color" content="#22c1c3" />
 
         <meta property="og:description" content="Find awesome Deno modules on Nest" />
         <meta property="og:image" content="https://og.nest.land/.png" />
@@ -83,15 +85,7 @@ export default function list() {
         <p>You've reached the nether region!</p>
       </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from '../styles/home.module.sass';
 import { useSession } from 'next-auth/client';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 export default function User() {
   const [session, loading] = useSession();
@@ -11,6 +12,7 @@ export default function User() {
       <Head>
         <title>User - Nest</title>
         <meta name="description" content="User Profile" />
+        <meta name="theme-color" content="#22c1c3" />
 
         <meta property="og:title" content="User - Nest" />
         <meta property="og:description" content="User Profile" />
@@ -76,15 +78,7 @@ export default function User() {
         </div>
       </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

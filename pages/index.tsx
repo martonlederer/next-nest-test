@@ -11,6 +11,7 @@ export default function Home() {
       <Head>
         <title>Nest</title>
         <meta name="description" content="Immutable Module registry for Deno" />
+        <meta name="theme-color" content="#22c1c3" />
 
         <meta property="og:title" content="Nest" />
         <meta property="og:description" content="Immutable Module registry for Deno" />

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../../styles/mod.module.sass';
 import { Remarkable } from 'remarkable';
 import Nav from '../../components/Nav';
+import Footer from '../../components/Footer';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 const md = new Remarkable({
@@ -16,6 +17,7 @@ export default function Module({ module, readme }) {
         <Head>
           <title>{module.name}</title>
           <meta name="description" content={module.description} />
+          <meta name="theme-color" content="#22c1c3" />
 
           <meta property="og:title" content={module.name + ' - Nest'} />
           <meta property="og:description" content={module.description} />
@@ -40,11 +42,7 @@ export default function Module({ module, readme }) {
           </div>
         </main>
 
-        <footer>
-          <a href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app" target="_blank" rel="noopener noreferrer">
-            Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
-          </a>
-        </footer>
+        <Footer />
       </div>
     );
   } else {
@@ -61,11 +59,7 @@ export default function Module({ module, readme }) {
           </div>          
         </main>
 
-        <footer>
-          <a href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app" target="_blank" rel="noopener noreferrer">
-            Powered by <img src="/vercel.svg" alt="Vercel Logo" className="vercel-logo" />
-          </a>
-        </footer>
+        <Footer />
       </div>
     );
   }

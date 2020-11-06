@@ -1,0 +1,89 @@
+@use '_variables.sass' as variables
+  
+pre
+  position: relative
+
+  code
+    &.language-shell, &.language-bash, &.language-sh, &.language-fish
+      margin-left: 1em
+
+      &::before
+        content: '$' // TODO in server side api: remove if there's alread a "$"
+        position: absolute
+        top: 50%
+        left: 0
+        transform: translateY(-50%)
+        +variables.gradientText
+
+    &::after
+      position: absolute
+      top: .4em
+      right: .75em
+      color: variables.$darker-text
+      font-size: .6em
+      font-weight: 500
+      text-transform: uppercase
+      font-family: variables.$font
+
+    &.language-ts::after, &.language-tsx::after
+      content: 'ts'
+
+    &.language-js::after, &.language-jsx::after
+      content: 'js'
+
+    &.language-rs::after, &.language-rust::after
+      content: 'rs'
+
+    &.language-go::after
+      content: 'go'
+
+    &.language-html::after
+      content: 'html'
+
+    &.language-css::after
+      content: 'css'
+
+    &.language-scss::after
+      content: 'scss'
+
+    &.language-sass::after
+      content: 'sass'
+
+    &.language-less::after
+      content: 'less'
+
+    &.language-stylus::after
+      content: 'stylus'
+
+    &.language-coffee::after
+      content: 'coffee'
+
+    &.language-shell::after
+      content: 'shell'
+
+    &.language-bash::after
+      content: 'bash'
+
+    &.language-sh::after
+      content: 'sh'
+
+    &.language-json::after
+      content: 'json'
+
+    &.language-yaml::after, &.language-yml::after
+      content: 'YAML'
+
+    &.language-fish::after
+      content: 'fish'
+
+    &.language-graphql::after, &.language-gql::after
+      content: 'graphql'
+
+    &.language-markdown::after, &.language-md::after
+      content: 'markdown'
+
+    &.language-rest::after
+      content: 'rest'
+
+    &.language-svg::after
+      content: 'svg'
