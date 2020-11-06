@@ -7,6 +7,7 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import hljs from 'highlight.js';
+import { bashFixer } from '../../utils/markdown';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 // setup markdown rendering
@@ -24,20 +25,7 @@ const md = new Remarkable({
 })
   .use(HeaderIdsPlugin({ anchorText: '<span class="head_anchor">#</span>' }))
   .use(linkify)
-  .use((md) => { 
-    // replace lines that start with "$" if the type of the parent element is a codeblock    
-    md.core.ruler.push('codeblocker', (state) => {
-      for(let i = 0; i < state.tokens.length; i++) {        
-        if(state.tokens[i].type !== 'fence') continue;
-        let lines = state.tokens[i].content.split('\n');
-        
-        for(let j = 0; j < lines.length; j++) {
-          lines[j] = lines[j].replace(/^\$( ?)/, '');
-        }
-        state.tokens[i].content = lines.join('\n');
-      }
-    });
-  });
+  .use(bashFixer);
 
 export default function Module({ module, readme }) {
   if (!module.not_found) {
