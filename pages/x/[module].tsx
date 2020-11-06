@@ -17,8 +17,12 @@ const md = new Remarkable({
   highlight: function (str: string, lang: string) {
     if (lang === 'sh' || lang === 'bash' || lang === 'shell') return ''; // highlighting breaks selecting terminal commands and comments display
     if (lang && hljs.getLanguage(lang))
-      try { return hljs.highlight(lang, str).value } catch (err) {}
-    try { return hljs.highlightAuto(str).value } catch (err) {}
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (err) {}
+    try {
+      return hljs.highlightAuto(str).value;
+    } catch (err) {}
 
     return '';
   }
@@ -51,9 +55,7 @@ export default function Module({ module, readme }) {
           <div className="landing">
             <h1 className="title">
               <Link href="/x">
-                <a className={styles.landingLink}>
-                  x
-                </a>
+                <a className={styles.landingLink}>x</a>
               </Link>
               /{module.name}
             </h1>
@@ -80,7 +82,7 @@ export default function Module({ module, readme }) {
           <div className="landing">
             <h1 className="title">Module Not Found</h1>
             <p className="description">The Module you're looking for doesn't exist.</p>
-          </div>          
+          </div>
         </main>
 
         <Footer />
@@ -103,7 +105,7 @@ export async function getStaticProps({ params }) {
     .catch((err) => '');
   return {
     props: { module, readme, not_found: false },
-    revalidate: 20,
+    revalidate: 20
   };
 }
 

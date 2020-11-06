@@ -15,31 +15,29 @@ export default function list() {
 
   useEffect(() => {
     loadModules(20);
-    axios.get('/api/modules/all').then(({ data }) => setCount(data.total))
+    axios.get('/api/modules/all').then(({ data }) => setCount(data.total));
     window.addEventListener('scroll', handleScroll, true);
-  
-    return function cleanup () {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  })
 
-  function handleScroll () {
-    if(count === 0 || count <= modules.length) return;
-    if(window.scrollY + window.innerHeight > document.body.clientHeight - 400) {
+    return function cleanup() {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+
+  function handleScroll() {
+    if (count === 0 || count <= modules.length) return;
+    if (window.scrollY + window.innerHeight > document.body.clientHeight - 400) {
       loadModules(modules.length + 40);
     }
   }
 
   // TODO: in api v2 change the limit to the additional number of packages to load
-  function loadModules (limit: number) {
-    if(!loading && modules.length < limit) {
+  function loadModules(limit: number) {
+    if (!loading && modules.length < limit) {
       loading = true;
-      axios
-        .get(`https://x.nest.land/api/packages/${limit}`)
-        .then(({ data }) => {
-          setModules(data);
-          setTimeout(() => loading = false, 700); // wait a bit so everything renders / appears
-        });
+      axios.get(`https://x.nest.land/api/packages/${limit}`).then(({ data }) => {
+        setModules(data);
+        setTimeout(() => (loading = false), 700); // wait a bit so everything renders / appears
+      });
     }
   }
 
@@ -72,11 +70,11 @@ export default function list() {
         <div className={styles.grid}>
           {modules.map((module, i) => (
             <Link href={`x/${module.name}`} key={i}>
-              <a className={cardStyles.card + " " + styles.card}>
+              <a className={cardStyles.card + ' ' + styles.card}>
                 <h3>{module.name}</h3>
-                <br/>
+                <br />
                 <p>{module.description}</p>
-                <br/>
+                <br />
                 <sub>by @{module.owner}</sub>
               </a>
             </Link>

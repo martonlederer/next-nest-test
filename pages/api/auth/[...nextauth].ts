@@ -6,13 +6,13 @@ const options = {
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientSecret: process.env.GITHUB_SECRET
     }),
     Providers.GitLab({
       clientId: process.env.GITLAB_CLIENT_ID,
-      clientSecret: process.env.GITLAB_CLIENT_SECRET,
-    }),
-  ],
+      clientSecret: process.env.GITLAB_CLIENT_SECRET
+    })
+  ]
 };
 
 export default (req, res) => NextAuth(req, res, options);
