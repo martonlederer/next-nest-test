@@ -12,6 +12,7 @@ import semver from 'semver';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { version } from 'os';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 // setup markdown rendering
@@ -40,7 +41,7 @@ export default function Module({ module, readme, error }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (error && error.msg === 'Invalid versioning') router.push(`/x/${error.redirect}`);
+    if (error && error.redirect) router.push(`/x/${error.redirect}`);
   });
 
   if (!error) {
@@ -116,24 +117,37 @@ export default function Module({ module, readme, error }) {
 export async function getStaticProps({ params }) {
   // check if module includes version
   if (!params.module.includes('@')) {
-    const latestVersion = await getLatestVersion(params.module);
-    if (typeof latestVersion !== 'string') return { props: { error: latestVersion } };
-    return { props: { error: { msg: 'Invalid versioning', redirect: `${params.module}@${latestVersion}` } } };
+    const latestVersion = await getLatest(params.module);
+    if (isLatestError(latestVersion)) return { props: { error: latestVersion } };
+    return { props: { error: { redirect: `${params.module}@${latestVersion.version}` } } };
   }
 
-  const [module, version] = params.module.split('@');
+  const [module, version] = params.module.split('@'),
+    latestVersion = await getLatest(module);
+
+  // check if there are errors getting the latest version
+  if (isLatestError(latestVersion)) return { props: { error: latestVersion } };
 
   // check if version is valid semver
   if (!semver.valid(version)) {
-    const latestVersion = await getLatestVersion(module);
-    if (typeof latestVersion !== 'string') return { props: { error: latestVersion } };
-    return { props: { error: { msg: 'Invalid versioning', redirect: `${module}@${latestVersion}` } } };
+    return { props: { error: { redirect: `${module}@${latestVersion.version}` } } };
+  }
+
+  // map the semver versions
+  const existingModuleVersions: string[] = latestVersion.data['packageUploadNames'].map(
+    (uploadName: string) => uploadName.split('@')[1]
+  );
+
+  // the given version does not exist
+  if (!existingModuleVersions.includes(version)) {
+    return { props: { error: { redirect: `${module}@${latestVersion.version}` } } };
   }
 
   const latestModule = await axios
     .get(`https://x.nest.land/api/package/${module}/${version}`)
     .then(({ data }) => data)
     .catch(() => null);
+
   const moduleReadme = await axios
     .get(`${latestModule.prefix}/README.md`)
     .then(({ data }) => data)
@@ -151,15 +165,25 @@ export async function getStaticPaths() {
   return { paths: [], fallback: 'blocking' };
 }
 
-async function getLatestVersion(module: string): Promise<string | { msg: string; description: string }> {
+interface ILatestModule {
+  version: string;
+  data: any;
+}
+
+interface ILatestError {
+  msg: string;
+  description: string;
+}
+
+async function getLatest(module: string): Promise<ILatestModule | ILatestError> {
   return await axios
     .get(`https://x.nest.land/api/package/${module}`)
     .then(({ data }) => {
       const stable = data.latestStableVersion,
         latest = data.latestVersion;
 
-      if (stable) return stable.split('@')[stable.split('@').length - 1];
-      else if (latest) return latest.split('@')[latest.split('@').length - 1];
+      if (stable) return { version: stable.split('@')[stable.split('@').length - 1], data };
+      else if (latest) return { version: latest.split('@')[latest.split('@').length - 1], data };
       else return { msg: 'No version published', description: "There are't any versions published." };
     })
     .catch(({ response }) => {
@@ -167,4 +191,8 @@ async function getLatestVersion(module: string): Promise<string | { msg: string;
         return { msg: 'Module Not Found', description: "The Module you're looking for doesn't exist." };
       else return { msg: 'Server error', description: 'There was an error with the server.' };
     });
+}
+
+function isLatestError(arg: ILatestModule | ILatestError): arg is ILatestError {
+  return (arg as ILatestError).msg !== undefined;
 }
