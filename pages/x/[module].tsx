@@ -7,7 +7,7 @@ import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 import hljs from 'highlight.js';
-import { bashFixer } from '../../utils/markdown';
+import { bashFixer, resourceFixer } from '../../utils/markdown';
 import semver from 'semver';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -33,7 +33,8 @@ const md = new Remarkable({
 })
   .use(HeaderIdsPlugin({ anchorText: '<span class="head_anchor">#</span>' }))
   .use(linkify)
-  .use(bashFixer);
+  .use(bashFixer)
+  .use(resourceFixer);
 
 export default function Module({ module, readme, error }) {
   const router = useRouter();
@@ -79,7 +80,10 @@ export default function Module({ module, readme, error }) {
           </div>
           <div className={styles.grid}>
             <div className={styles.card}>
-              <div className="markdown" dangerouslySetInnerHTML={{ __html: md.render(readme) }}></div>
+              <div
+                className="markdown"
+                dangerouslySetInnerHTML={{ __html: md.render(readme).replace(/<MOD_NAME>/g, module.name) }}
+              ></div>
             </div>
           </div>
         </main>
