@@ -12,7 +12,6 @@ import semver from 'semver';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { version } from 'os';
 
 const HeaderIdsPlugin = require('remarkable-header-ids');
 // setup markdown rendering
