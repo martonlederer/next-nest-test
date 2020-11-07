@@ -69,7 +69,7 @@ export default function list() {
 
         <div className={styles.grid}>
           {modules.map((module, i) => (
-            <Link href={`x/${module.name}`} key={i}>
+            <Link href={`x/${module.latestStableVersion ?? module.latestVersion ?? module.name}`} key={i}>
               <a className={cardStyles.card + ' ' + styles.card}>
                 <h3>{module.name}</h3>
                 <br />
